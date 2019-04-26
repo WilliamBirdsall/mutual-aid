@@ -1,0 +1,12 @@
+body {
+    margin: 0rem;
+}
+
+.simulationSpace {
+    width: 100%;
+    height: calc(100vh - 4px);
+}
+
+canvas {
+    border: 2px solid #111;
+}
