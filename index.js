@@ -3,7 +3,7 @@ const socket = require('socket.io');
 
 // Server setup
 const app = express();
-let server = app.listen(3000, () => console.log('Server running on localhost port 3000.'));
+let server = app.listen(process.env.PORT || 8080);
 
 app.set('view engine', 'pug');
 app.use(express.static('static_files'));
