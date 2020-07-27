@@ -14,7 +14,6 @@ app.use(express.urlencoded());
 let io = socket(server);
 
 io.sockets.on('connection', (socket) => {
-    console.log("Connection!");
     socket.on('newSubmit', (m) => {
         io.emit('newMover', m);
     });
