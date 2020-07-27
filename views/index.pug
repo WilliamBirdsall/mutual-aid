@@ -2,3 +2,23 @@ extends layout.pug
 block content
     .simulationSpace
         canvas(id="canvas")
+    button.btn.addCreatureButton + Add Creature
+    .createModal.hidden
+        .closeButton Close
+        form(id="create-form")
+            h2 Create New Creature
+
+            label(for="color") Color:
+            select(name="color")
+                option(value="red") Red
+                option(value="blue") Blue
+                option(value="yellow") Yellow
+
+            label(for="mood") Mood:
+            select(name="mood")
+                option(value=4) Happy :)
+                option(value=3) Normal :|
+                option(value=2) Meh :/
+                option(value=1) Sad :(
+
+            button(class="btn", type="submit") Create

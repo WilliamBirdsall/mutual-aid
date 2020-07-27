@@ -4,8 +4,8 @@ let ctx = c.getContext("2d");
 
 const simulationSpace = document.querySelector('.simulationSpace');
 
-c.width = simulationSpace.clientWidth - 4;
-c.height = simulationSpace.clientHeight - 4;
+c.width = simulationSpace.clientWidth;
+c.height = simulationSpace.clientHeight;
 
 // Mover Model
 class Mover {
@@ -55,6 +55,14 @@ socket.on('newMover', (m) => {
     simulation.movers.push(newMover);
     simulation.moverCount++;
 });
+
+// Handle create creature form submit
+document.getElementById('create-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Emit new creature event
+    socket.emit('newSubmit', {color: event.target.color.value, mood: event.target.mood.value});
+})
 
 // Sub-routines
 function blendColors(m1, m2) {
@@ -168,5 +176,25 @@ function draw() {
     window.requestAnimationFrame(draw);
 }
 
+function setUpAddButton() {
+    let addButton = document.getElementsByClassName('addCreatureButton')[0];
+    let createModal = document.getElementsByClassName('createModal')[0];
+
+    addButton.addEventListener('click', (event) => {
+        createModal.classList.remove('hidden');
+    });
+}
+
+function setUpCloseButton() {
+    let closeButton = document.getElementsByClassName('closeButton')[0];
+    let createModal = document.getElementsByClassName('createModal')[0];
+
+    closeButton.addEventListener('click', (event) => {
+        createModal.classList.add('hidden');
+    });
+}
+
 // Main
+setUpAddButton();
+setUpCloseButton();
 window.requestAnimationFrame(draw);

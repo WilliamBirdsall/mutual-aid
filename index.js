@@ -13,18 +13,14 @@ app.use(express.urlencoded());
 // Sockets.io
 let io = socket(server);
 
+io.sockets.on('connection', (socket) => {
+    console.log("Connection!");
+    socket.on('newSubmit', (m) => {
+        io.emit('newMover', m);
+    });
+});
+
 // Routes
 app.get('/', (req, res) => {
     res.render('index');
-});
-
-app.get('/create', (req, res) => {
-    res.render('create');
-});
-
-app.post('/create', (req, res) => {
-    res.render('create');
-    
-    // Send new mover data to client
-    io.emit('newMover', req.body);
 });
